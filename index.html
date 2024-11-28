@@ -51,6 +51,60 @@
               width: 100%;
               position: absolute;
             }
+	    
+        /* Barra superior */
+        .navbar {
+            position: fixed; /* Fija la barra en la parte superior */
+            top: 0;
+            width: 100%;
+            background-color: #333; /* Color de fondo */
+            color: white; /* Color del texto */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000; /* Asegura que la barra esté encima de otros elementos */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+        }
+
+        /* Logo o nombre del sitio */
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Enlaces de navegación */
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff6347; /* Color al pasar el ratón (naranja) */
+        }
+
+        /* Contenido principal */
+        .content {
+            margin-top: 70px; /* Altura de la barra para evitar solapamiento */
+            padding: 20px;
+        }
+
+        /* Ejemplo de secciones largas */
+        .section {
+            height: 800px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+    
     </style>
 </head>
 <body>
