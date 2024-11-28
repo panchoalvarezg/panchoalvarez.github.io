@@ -151,17 +151,7 @@
         </div>
     </div>
 
-    <script>
-        function setLanguage(lang) {
-            // Ocultar todos los textos
-            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
-            
-            // Mostrar el texto en el idioma seleccionado
-            document.querySelector(`.text-${lang}`).classList.remove("d-none");
-        }
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
       <br>
   <br>
@@ -302,5 +292,16 @@
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w&callback=initMap"
               defer>
           </script>
+	    <script>
+        function setLanguage(lang) {
+            // Ocultar todos los textos
+            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
+            
+            // Mostrar el texto en el idioma seleccionado
+            document.querySelector(`.text-${lang}`).classList.remove("d-none");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
