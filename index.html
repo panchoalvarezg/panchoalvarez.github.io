@@ -1,39 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Diseño Software</title>
-    <link rel="stylesheet" href="./main.css">
+    <title>Pesca Ilegal en Oriente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            text-align: center;
+            padding-top: 20px;
+        }
+        .carousel-item img {
+            max-height: 400px;
+            object-fit: cover;
+        }
+        .lang-buttons {
+            margin: 15px 0;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1 class="logo">Carpi Coder</h1>
-        <nav class="menu">
-            <a class="menu-item" href="#" data-section="header" data-value="about-me">Sobre mí</a>
-            <a class="menu-item" href="#" data-section="header" data-value="experience">Experiencia</a>
-        </nav>
-        <div class="languages">
-            <button class="lang-button" data-language="es">🇪🇸</button>
-            <button class="lang-button" data-language="en">🇬🇧</button>
-        </div>
-    </header>
-    <main>
-        <section class="section" id="about-me">
-            <h2 data-section="about-me" data-value="title">Sobre mí</h2>
-            <p data-section="about-me" data-value="text">Aprendí a hacer sitios web por mi cuenta y ahora quiero compartir las herramientas que adquirí a lo largo de los años. Sé que a veces puede ser frustrante y difícil avanzar, por eso creo estos videítos. Mi objetivo es ayudarte a comprender mejor los principales lenguajes de desarrollo frontend y acompañarte en tu camino de aprendizaje.</p>
-        </section>
-        <section class="section" id="experience">
-            <h2 data-section="experience" data-value="title">Experiencia</h2>
-            <p data-section="experience" data-value="text">De 2014 a 2021 trabajé como Desarrollador Frontend & WordPress en 🇦🇷 Su Web Express, una de las agencias digitales líderes en Argentina. En 2019 creamos 🇺🇾 Urutienda, donde trabajo como Desarrollador WordPress y Líder en Help Desk desde entonces. En 2022 comencé a dar clases de Desarrollo Web en la academia digital Coderhouse. Además creé mi canal de YouTube como un espacio en el que compartir contenido extra con mi alumnado, y evolucionó en lo que es hoy: un canal con muchos videos y cursos sobre HTML, CSS y JavaScript, llegando a 16500 suscriptores. En 2023 me trasladé a 🇪🇸 España, en búsqueda de desafíos, oportunidades y nuevos proyectos.</p>
-        </section>
-    </main>
-    <footer class="footer">
-        Carpi Coder
-    </footer>
-    
+    <div class="container">
+        <h1>Pesca Ilegal en Oriente</h1>
 
-    <script src="./js/main.js"></script>
+        <!-- Botones de idioma -->
+        <div class="lang-buttons">
+            <button class="btn btn-primary btn-sm" onclick="setLanguage('es')">Español</button>
+            <button class="btn btn-secondary btn-sm" onclick="setLanguage('en')">English</button>
+            <button class="btn btn-dark btn-sm" onclick="setLanguage('zh')">中文</button>
+        </div>
+
+        <!-- Carrusel -->
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://via.placeholder.com/800x400?text=Imagen+1" class="d-block w-100" alt="Imagen 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/800x400?text=Imagen+2" class="d-block w-100" alt="Imagen 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/800x400?text=Imagen+3" class="d-block w-100" alt="Imagen 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+        <!-- Texto sobre pesca ilegal -->
+        <div id="content" class="mt-4">
+            <p class="text-es">La pesca ilegal en Oriente pone en riesgo la biodiversidad marina y la economía de comunidades costeras.</p>
+            <p class="text-en d-none">Illegal fishing in the East endangers marine biodiversity and the economy of coastal communities.</p>
+            <p class="text-zh d-none">东方的非法捕捞威胁着海洋生物多样性和沿海社区的经济。</p>
+        </div>
+    </div>
+
+    <script>
+        function setLanguage(lang) {
+            // Ocultar todos los textos
+            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
+            
+            // Mostrar el texto en el idioma seleccionado
+            document.querySelector(`.text-${lang}`).classList.remove("d-none");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
