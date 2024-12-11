@@ -28,43 +28,43 @@
             text-align: center;
             margin-bottom: 15px;
         }
-        table {
-            border: 3px solid #7ecdfa;
-            padding: 100px 100px;
-            margin-top: 30px;
-            margin-left: 280px;
-            border-radius: 5px;
-            background-color: #428cfc;
-        }
+            table {
+              border: 3px solid #7ecdfa;
+              padding: 100px 100px;
+              margin-top: 30px;
+              margin-left: 280px;
+              border-radius: 5px;
+              background-color: #428cfc;
+            }
 
-        .map-container-2 {
-            overflow: hidden;
-            padding: 400px 600px;
-            margin-top: 50;
-            height: 0;
-        }
-
-        .map-container-2 iframe {
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-        }
+            .map-container-2 {
+              overflow: hidden;
+              padding: 400px 600px;
+              margin-top: 50;
+              height: 0;
+            }
+        
+            .map-container-2 iframe {
+              left: 0;
+              top: 0;
+              height: 100%;
+              width: 100%;
+              position: absolute;
+            }
 	    
         /* Barra superior */
         .navbar {
-            position: fixed;
+            position: fixed; /* Fija la barra en la parte superior */
             top: 0;
             width: 100%;
-            background-color: #333;
-            color: white;
+            background-color: #333; /* Color de fondo */
+            color: white; /* Color del texto */
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            z-index: 1000;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000; /* Asegura que la barra esté encima de otros elementos */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
         }
 
         /* Logo o nombre del sitio */
@@ -87,7 +87,7 @@
         }
 
         .navbar .nav-links a:hover {
-            color: #ff6347;
+            color: #ff6347; /* Color al pasar el ratón (naranja) */
         }
 
         /* Contenido principal */
@@ -129,7 +129,8 @@
         .form-inline button:hover {
             background-color: #0056b3;
         }
-	    
+
+	
     </style>
 </head>
 <body>
@@ -148,7 +149,7 @@
                         <form class="form-inline" id="login-form">
                             <input type="email" id="login-email" placeholder="Correo Electrónico" required>
                             <input type="password" id="login-password" placeholder="Contraseña" required>
-                            <button type="button" class="btn btn-success" onclick="login()">Iniciar Sesión</button>
+                            <button type="button" onclick="login()">Iniciar Sesión</button>
                         </form>
                         <form class="form-inline d-none" id="logout-form">
                             <span id="welcome-message" style="color: white; margin-right: 10px;"></span>
@@ -159,6 +160,9 @@
             </div>
         </div>
     </nav>
+
+</body>
+<body>
     <div class="container">
         <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
 
