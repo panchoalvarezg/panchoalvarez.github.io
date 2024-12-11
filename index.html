@@ -108,70 +108,58 @@
     </style>
 </head>
 <body>
+	<!-- Botones de idioma -->
      <div class="lang-buttons">
             <button class="btn btn-primary btn-sm" onclick="setLanguage('es')">Español</button>
             <button class="btn btn-secondary btn-sm" onclick="setLanguage('en')">English</button>
             <button class="btn btn-warning btn-sm" onclick="setLanguage('th')">ไทย</button>
             <button class="btn btn-dark btn-sm" onclick="setLanguage('zh')">中文</button>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mi Sitio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Usuario
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                            <!-- Formulario de Login -->
-                            <h5>Iniciar Sesión</h5>
-                            <form action="login.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="loginUsername" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Ingrese su usuario" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Ingrese su contraseña" required>
-                                </div>
-                                <button onclick="location.href='secundaria.html'">Entrar</button>
-                            </form>
-                            <hr>
-                            <!-- Formulario de Registro -->
-                            <h5>Registro</h5>
-                            <form action="register.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="registerUsername" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="registerUsername" name="username" placeholder="Cree un usuario" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="registerEmail" class="form-label">Correo Electrónico</label>
-                                    <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="registerPassword" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
-                                </div>
-                                <button type="submit" class="btn btn-success w-100">Registrar</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav-links navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <h5>Iniciar Sesión</h5>
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginUsername" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Ingrese su contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                        <hr>
+                        <h5>Registro</h5>
+                        <form id="registerForm">
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="registerUsername" placeholder="Cree un usuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="registerEmail" placeholder="Ingrese su correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="registerPassword" placeholder="Cree una contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Registrar</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
-
-</body>
-<body>
     <div class="container">
         <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
-
-        <!-- Botones de idioma -->
 
         <!-- Carrusel -->
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -229,6 +217,40 @@
     <div id="map"></div>
 
     <script>
+
+        // Manejo del registro
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ username, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registro exitoso. ¡Ahora puedes iniciar sesión!');
+            this.reset();
+        });
+
+        // Manejo del login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert(`¡Bienvenido, ${user.username}!`);
+            } else {
+                alert('Usuario o contraseña incorrectos.');
+            }
+
+            this.reset();
+        });
+
         function initMap() {
             // Crear el mapa y centrarlo en China
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -261,13 +283,7 @@
 
         // Inicializar el mapa
         window.onload = initMap;
-    </script>
 
-
-
-
-
-   <script>
         function setLanguage(lang) {
             // Ocultar todos los textos
             document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
