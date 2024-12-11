@@ -104,33 +104,7 @@
             padding: 20px;
             background: #f9f9f9;
         }
-    	
-	.form-inline {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-inline input {
-            padding: 5px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        .form-inline button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-inline button:hover {
-            background-color: #0056b3;
-        }
-
-	
+    
     </style>
 </head>
 <body>
@@ -143,18 +117,49 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mi Sitio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <form class="form-inline" id="login-form">
-                            <input type="email" id="login-email" placeholder="Correo Electrónico" required>
-                            <input type="password" id="login-password" placeholder="Contraseña" required>
-                            <button type="button" onclick="login()">Iniciar Sesión</button>
-                        </form>
-                        <form class="form-inline d-none" id="logout-form">
-                            <span id="welcome-message" style="color: white; margin-right: 10px;"></span>
-                            <button type="button" onclick="logout()">Cerrar Sesión</button>
-                        </form>
+                    <!-- Menú desplegable -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usuario
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <!-- Formulario de Login -->
+                            <h5>Iniciar Sesión</h5>
+                            <form action="login.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="loginUsername" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Ingrese su usuario" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Ingrese su contraseña" required>
+                                </div>
+                                <button onclick="location.href='secundaria.html'">Entrar</button>
+                            </form>
+                            <hr>
+                            <!-- Formulario de Registro -->
+                            <h5>Registro</h5>
+                            <form action="register.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="registerUsername" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="registerUsername" name="username" placeholder="Cree un usuario" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">Registrar</button>
+                            </form>
+                        </div>
                     </li>
                 </ul>
             </div>
