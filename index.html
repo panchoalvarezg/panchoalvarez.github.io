@@ -129,19 +129,6 @@
         .form-inline button:hover {
             background-color: #0056b3;
         }
-
-	.btn-success {
-            padding: 5px 10px;
-            border: none;
-            background-color: #28a745;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
     </style>
 </head>
 <body>
@@ -160,7 +147,7 @@
                         <form class="form-inline" id="login-form">
                             <input type="email" id="login-email" placeholder="Correo Electrónico" required>
                             <input type="password" id="login-password" placeholder="Contraseña" required>
-                            <button type="button" class="btn btn-success" onclick="login()">Iniciar Sesión</button>
+                            <button type="button" onclick="login()">Iniciar Sesión</button>
                         </form>
                         <form class="form-inline d-none" id="logout-form">
                             <span id="welcome-message" style="color: white; margin-right: 10px;"></span>
