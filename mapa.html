@@ -3,68 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa con Marcadores</title>
+    <title>proyecto pesca ilegal tics 316</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        /* Estilo del mapa para que ocupe toda la pantalla */
-        #map {
-            height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
-            width: 100%;   /* Ocupa el 100% del ancho */
+        body {
+            background-color: #a8c9e9;
+            text-align: center;
+            padding-top: 20px;
         }
+        .carousel-item img {
+            max-height: 800px;
+            object-fit: cover;
+        }
+        .lang-buttons {
+            margin: 50px 0;
+        }
+        .dropdown-menu {
+            background-color: #e0e3e9;
+            width: 350px;
+            padding: 20px;
+        }
+        .dropdown-menu h5 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+            table {
+              border: 3px solid #7ecdfa;
+              padding: 100px 100px;
+              margin-top: 30px;
+              margin-left: 280px;
+              border-radius: 5px;
+              background-color: #428cfc;
+            }
+
+            .map-container-2 {
+              overflow: hidden;
+              padding: 400px 600px;
+              margin-top: 50;
+              height: 0;
+            }
+        
+            .map-container-2 iframe {
+              left: 0;
+              top: 0;
+              height: 100%;
+              width: 100%;
+              position: absolute;
+            }
+	    
+        /* Barra superior */
+        .navbar {
+            position: fixed; /* Fija la barra en la parte superior */
+            top: 0;
+            width: 100%;
+            background-color: #FFFFFF; /* Color de fondo */
+            color: white; /* Color del texto */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000; /* Asegura que la barra esté encima de otros elementos */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+        }
+
+        /* Logo o nombre del sitio */
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Enlaces de navegación */
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff6347; /* Color al pasar el ratón (naranja) */
+        }
+
+        /* Contenido principal */
+        .content {
+            margin-top: 70px; /* Altura de la barra para evitar solapamiento */
+            padding: 20px;
+        }
+
+        /* Ejemplo de secciones largas */
+        .section {
+            height: 800px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+    
     </style>
 </head>
 <body>
+	<!-- Botones de idioma -->
+     <div class="lang-buttons">
+            <button class="btn btn-primary btn-sm" onclick="setLanguage('es')">Español</button>
+            <button class="btn btn-secondary btn-sm" onclick="setLanguage('en')">English</button>
+            <button class="btn btn-warning btn-sm" onclick="setLanguage('th')">ไทย</button>
+            <button class="btn btn-dark btn-sm" onclick="setLanguage('zh')">中文</button>
 
-<h1>Mapa con Marcadores de Google</h1>
-<!-- Contenedor del mapa -->
-<div id="map"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">FJSA</a>
+            <ul class="nav-links navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <h5>Iniciar Sesión</h5>
+                        <form id="loginForm" >
+                            <div class="mb-3">
+                                <label for="loginUsername" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Ingrese su contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                        <hr>
+                        <h5>Registro</h5>
+			    <form id="registerForm" >
+  				  <div class="mb-3">
+        				<label for="registerUsername" class="form-label">Usuario</label>
+      			 		<input type="text" class="form-control" id="registerUsername" name="usuario" placeholder="Cree un usuario" required>
+  				  </div>
+    				<div class="mb-3">
+      				  <label for="registerEmail" class="form-label">Correo Electrónico</label>
+      				  <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
+   				 </div>
+   				 <div class="mb-3">
+    				    <label for="registerPassword" class="form-label">Contraseña</label>
+    				    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
+   				  </div>
+   				  <button type="submit" class="btn btn-success w-100">Registrar</button>
+			  </form>
 
-<script>
-    function initMap() {
-        // Centro del mapa (puedes cambiarlo)
-        const centerCoordinates = { lat: 10.0, lng: -84.0 }; // Coordenadas centrales (puedes personalizar)
+			<script>
+			document.getElementById('registerForm').addEventListener('submit', function(event) {
+			    event.preventDefault(); // Evita el envío predeterminado del formulario
 
-        // Crear el mapa centrado en las coordenadas
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 6, // Nivel de zoom inicial
-            center: centerCoordinates, // Centro del mapa
-        });
+			    // Capturar los datos ingresados (opcional)
+			    const usuario = document.getElementById('registerUsername').value;
+			    const email = document.getElementById('registerEmail').value;
+			    const password = document.getElementById('registerPassword').value;
 
-        // Datos de los dos puntos de coordenadas
-        const points = [
-            {
-                coords: { lat: 10.0, lng: -84.0 }, 
-                description: 'Este es el primer punto de interés. ¡Bienvenido!'
-            },
-            {
-                coords: { lat: 9.5, lng: -83.0 }, 
-                description: 'Este es el segundo punto de interés. ¡Aquí hay algo interesante!'
-            }
-        ];
+			    if (usuario && email && password) {
+			        alert('¡Registro exitoso! Redirigiendo...');
+			        window.location.href = 'https://panchoalvarezg.github.io/panchoalvarez.github.io/secundaria.html'; // Redirige a otra página
+			    } else {
+			        alert('Por favor, complete todos los campos.');
+ 			   }
+			});
+			</script>
+		  </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+	     
+    <div class="container">
+        <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
 
-        // Crear los marcadores para cada punto
-        points.forEach(point => {
-            const marker = new google.maps.Marker({
-                position: point.coords, // Coordenadas del marcador
-                map: map,               // Mapa donde se muestra el marcador
-            });
 
-            // Crear la ventana de información (InfoWindow)
-            const infoWindow = new google.maps.InfoWindow({
-                content: `<p>${point.description}</p>`, // Descripción del punto
-            });
 
-            // Mostrar la ventana de información al hacer clic en el marcador
-            marker.addListener('click', () => {
-                infoWindow.open(map, marker);
-            });
-        });
-    }
-</script>
 
-<!-- Cargar la API de Google Maps -->
-<script async 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w">
-</script>
+    <title>Mapa Mundial</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w&callback=initMap"></script>
 
+    <style>
+        #map {
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            width: 100%; /* Ocupa todo el ancho */
+        }
+    </style>
 </body>
+<body>
+    <div id="map"></div>
+
+    <script>
+
+        // Manejo del registro
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ username, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registro exitoso. ¡Ahora puedes iniciar sesión!');
+            this.reset();
+        });
+
+        // Manejo del login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert(`¡Bienvenido, ${user.username}!`);
+            } else {
+                alert('Usuario o contraseña incorrectos.');
+            }
+
+            this.reset();
+        });
+
+        function initMap() {
+            // Crear el mapa y centrarlo en China
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas del centro de China
+                mapTypeId: "terrain",
+            });
+
+            // Cargar el archivo GeoJSON
+            map.data.loadGeoJson('china.geojson');
+
+            // Estilo del polígono
+            map.data.setStyle({
+                fillColor: "#FF0000", // Relleno rojo
+                fillOpacity: 0.4,   // Opacidad del relleno
+                strokeColor: "#FF0000", // Borde rojo
+                strokeWeight: 2,     // Grosor del borde
+            });
+
+            // Mostrar información del polígono al hacer clic
+            map.data.addListener("click", function (event) {
+                const name = event.feature.getProperty("name");
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<strong>${name}</strong>`,
+                    position: event.latLng,
+                });
+                infoWindow.open(map);
+            });
+        }
+
+        // Inicializar el mapa
+        window.onload = initMap;
+
+        function setLanguage(lang) {
+            // Ocultar todos los textos
+            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
+            
+            // Mostrar el texto en el idioma seleccionado
+            document.querySelector(`.text-${lang}`).classList.remove("d-none");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
