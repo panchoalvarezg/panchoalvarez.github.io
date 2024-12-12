@@ -123,35 +123,15 @@
                     <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Usuario
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                        <h5>Iniciar Sesión</h5>
-                        <form id="loginForm" >
-                            <div class="mb-3">
-                                <label for="loginUsername" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Ingrese su contraseña" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                        </form>
-                        <hr>
-                        <h5>Registro</h5>
-			    <form id="registerForm" >
-  				  <div class="mb-3">
-        				<label for="registerUsername" class="form-label">Usuario</label>
-      			 		<input type="text" class="form-control" id="registerUsername" name="usuario" placeholder="Cree un usuario" required>
-  				  </div>
-    				<div class="mb-3">
-      				  <label for="registerEmail" class="form-label">Correo Electrónico</label>
-      				  <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
-   				 </div>
-   				 <div class="mb-3">
-    				    <label for="registerPassword" class="form-label">Contraseña</label>
-    				    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
-   				  </div>
-   				  <button type="submit" class="btn btn-success w-100">Registrar</button>
+			<div class="dropdown">
+   			 <button>👤 Mi Cuenta</button>
+			    <div class="dropdown-content">
+  			      <a href="perfil.html">Ver Perfil</a>
+			      <div class="logout-button" id="logoutButton">Cerrar sesión</div>
+			    </div>
+			</div>
+                    
+                    
 			  </form>
 
 			<script>
@@ -177,31 +157,8 @@
         </div>
     </nav>
 	     
-    <div class="container">
-        <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
 
-        <!-- Carrusel -->
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 3">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
-        </div>
+
 
         <!-- Texto sobre pesca ilegal -->
         <div id="content" class="mt-4">
