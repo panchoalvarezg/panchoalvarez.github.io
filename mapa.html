@@ -231,47 +231,51 @@
             this.reset();
         });
 
-        function initMap() {
-            // Crear el mapa y centrarlo en China
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 4,
-                center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas del centro de China
-                mapTypeId: "terrain",
+<script>
+    function initMap() {
+        // Centro del mapa (puedes cambiarlo)
+        const centerCoordinates = { lat: 10.0, lng: -84.0 }; // Coordenadas centrales (puedes personalizar)
+
+        // Crear el mapa centrado en las coordenadas
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 6, // Nivel de zoom inicial
+            center: centerCoordinates, // Centro del mapa
+        });
+
+        // Datos de los dos puntos de coordenadas
+        const points = [
+            {
+                coords: { lat: 10.0, lng: -84.0 }, 
+                description: 'Este es el primer punto de interés. ¡Bienvenido!'
+            },
+            {
+                coords: { lat: 9.5, lng: -83.0 }, 
+                description: 'Este es el segundo punto de interés. ¡Aquí hay algo interesante!'
+            }
+        ];
+
+        // Crear los marcadores para cada punto
+        points.forEach(point => {
+            const marker = new google.maps.Marker({
+                position: point.coords, // Coordenadas del marcador
+                map: map,               // Mapa donde se muestra el marcador
             });
 
-            // Cargar el archivo GeoJSON
-            map.data.loadGeoJson('china.geojson');
-
-            // Estilo del polígono
-            map.data.setStyle({
-                fillColor: "#FF0000", // Relleno rojo
-                fillOpacity: 0.4,   // Opacidad del relleno
-                strokeColor: "#FF0000", // Borde rojo
-                strokeWeight: 2,     // Grosor del borde
+            // Crear la ventana de información (InfoWindow)
+            const infoWindow = new google.maps.InfoWindow({
+                content: `<p>${point.description}</p>`, // Descripción del punto
             });
 
-            // Mostrar información del polígono al hacer clic
-            map.data.addListener("click", function (event) {
-                const name = event.feature.getProperty("name");
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<strong>${name}</strong>`,
-                    position: event.latLng,
-                });
-                infoWindow.open(map);
+            // Mostrar la ventana de información al hacer clic en el marcador
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
             });
-        }
-
-        // Inicializar el mapa
-        window.onload = initMap;
-
-        function setLanguage(lang) {
-            // Ocultar todos los textos
-            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
-            
-            // Mostrar el texto en el idioma seleccionado
-            document.querySelector(`.text-${lang}`).classList.remove("d-none");
-        }
-    </script>
+        });
+    }
+</script>
+<script async 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w">
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
