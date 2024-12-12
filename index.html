@@ -305,44 +305,92 @@
             // Mostrar el texto en el idioma seleccionado
             document.querySelector(`.text-${lang}`).classList.remove("d-none");
         }
-    </script>
   <style>
-    #chatbot-container {
+    /* Botón flotante para abrir/cerrar el chatbot */
+    #chatbot-button {
       position: fixed;
       bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      border: none;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    /* Contenedor del chatbot */
+    #chatbot-container {
+      position: fixed;
+      bottom: 90px;
       right: 20px;
       width: 300px;
       height: 400px;
       background-color: #f1f1f1;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: flex;
+      display: none;
       flex-direction: column;
+      overflow: hidden;
     }
+
+    /* Encabezado del chatbot */
+    #chatbot-header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    /* Área de mensajes del chatbot */
     #chat-messages {
       flex: 1;
       padding: 10px;
       overflow-y: auto;
+      background-color: #ffffff;
     }
+
+    /* Entrada de mensaje de usuario */
     #user-input {
       display: flex;
     }
+
     #user-message {
       flex: 1;
       border: none;
       padding: 10px;
+      border-top: 1px solid #ddd;
     }
+
     #send-button {
       background-color: #007bff;
       color: white;
       border: none;
-      padding: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #send-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
+<!-- Botón flotante para abrir/cerrar el chatbot -->
+<button id="chatbot-button">💬</button>
+
+<!-- Contenedor del chatbot -->
 <div id="chatbot-container">
+  <div id="chatbot-header">Chatbot Pesca Ilegal</div>
   <div id="chat-messages"></div>
   <div id="user-input">
     <input type="text" id="user-message" placeholder="Escribe tu mensaje aquí...">
@@ -351,10 +399,18 @@
 </div>
 
 <script>
+  const chatbotButton = document.getElementById('chatbot-button');
+  const chatbotContainer = document.getElementById('chatbot-container');
   const messagesContainer = document.getElementById('chat-messages');
   const userInput = document.getElementById('user-message');
   const sendButton = document.getElementById('send-button');
 
+  // Mostrar/ocultar el chatbot
+  chatbotButton.addEventListener('click', () => {
+    chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'flex' : 'none';
+  });
+
+  // Enviar mensaje
   function sendMessage() {
     const userMessage = userInput.value;
     if (!userMessage) return;
@@ -366,29 +422,45 @@
     setTimeout(() => addMessage('Bot', botResponse), 1000);
   }
 
+  // Añadir mensaje al historial de mensajes
   function addMessage(sender, message) {
     const messageElement = document.createElement('div');
     messageElement.textContent = `${sender}: ${message}`;
+    messageElement.style.marginBottom = '10px';
+    messageElement.style.padding = '8px';
+    messageElement.style.backgroundColor = sender === 'Usuario' ? '#007bff' : '#ddd';
+    messageElement.style.color = sender === 'Usuario' ? 'white' : 'black';
+    messageElement.style.borderRadius = '8px';
+    messageElement.style.textAlign = sender === 'Usuario' ? 'right' : 'left';
     messagesContainer.appendChild(messageElement);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 
+  // Respuesta automática del bot
   function getBotResponse(userMessage) {
-    if (userMessage.includes('¿Qué es la pesca ilegal?')) {
-      return 'La pesca ilegal es toda actividad de pesca que no cumple con las leyes locales, nacionales o internacionales.';
+    const message = userMessage.toLowerCase();
+
+    if (message.includes('¿qué es la pesca ilegal?')) {
+      return 'La pesca ilegal es la actividad pesquera que no respeta las leyes locales o internacionales. En Oriente, esto incluye la pesca en áreas protegidas o sin los permisos correspondientes.';
     }
-    if (userMessage.includes('denunciar')) {
-      return 'Para denunciar pesca ilegal, puedes comunicarte con la Oficina de Control Pesquero al 123-456-789.';
+
+    if (message.includes('denunciar')) {
+      return 'Para denunciar pesca ilegal, puedes comunicarte con la **Oficina de Control Pesquero** al 📞 123-456-789 o hacer la denuncia anónima a través de [este formulario](#).';
     }
-    return 'Lo siento, no entendí tu mensaje. Intenta preguntar algo como "¿Qué es la pesca ilegal?"';
+
+    if (message.includes('normativa') || message.includes('leyes')) {
+      return 'Las leyes de pesca en Oriente prohíben la captura de especies protegidas y la pesca en áreas restringidas. Las sanciones incluyen multas y la confiscación de equipos.';
+    }
+
+    return 'Lo siento, no entendí tu mensaje. Intenta preguntar: "¿Qué es la pesca ilegal?" o "¿Cómo denunciar pesca ilegal?"';
   }
 
+  // Escucha el clic en el botón de enviar
   sendButton.addEventListener('click', sendMessage);
   userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
   });
 </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
