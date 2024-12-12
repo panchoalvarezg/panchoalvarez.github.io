@@ -221,18 +221,21 @@
 
         // Manejo del registro
         document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('registerUsername').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
+ 	 e.preventDefault();
+	  const username = document.getElementById('registerUsername').value;
+ 	 const email = document.getElementById('registerEmail').value;
+ 	 const password = document.getElementById('registerPassword').value;
 
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            users.push({ username, email, password });
-            localStorage.setItem('users', JSON.stringify(users));
-
-            alert('Registro exitoso. ¡Ahora puedes iniciar sesión!');
-            this.reset();
-        });
+ 	 fetch('register.php', {
+ 	   method: 'POST',
+	    headers: {
+ 	     'Content-Type': 'application/x-www-form-urlencoded'
+ 	   },
+	    body: `username=${username}&email=${email}&password=${password}`
+	  })
+	  .then(response => response.text())
+	  .then(message => alert(message));
+	});
 
         // Manejo del login
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -243,15 +246,16 @@
             const users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(user => user.username === username && user.password === password);
 
-            if (user) {
-                alert(`¡Bienvenido, ${user.username}!`);
-            } else {
-                alert('Usuario o contraseña incorrectos.');
-            }
-
-            this.reset();
-        });
-
+              fetch('login.php', {
+  	  method: 'POST',
+  	  headers: {
+ 	     'Content-Type': 'application/x-www-form-urlencoded'
+ 	   },
+	    body: `username=${username}&password=${password}`
+	  })
+	  .then(response => response.text())
+	  .then(message => alert(message));
+});
         function initMap() {
             // Crear el mapa y centrarlo en China
             const map = new google.maps.Map(document.getElementById("map"), {
