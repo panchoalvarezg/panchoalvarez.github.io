@@ -125,7 +125,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                         <h5>Iniciar Sesión</h5>
-                        <form id="loginForm">
+                        <form id="loginForm" >
                             <div class="mb-3">
                                 <label for="loginUsername" class="form-label">Usuario</label>
                                 <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
@@ -138,22 +138,40 @@
                         </form>
                         <hr>
                         <h5>Registro</h5>
-                        <form id="registerForm">
-                            <div class="mb-3">
-                                <label for="registerUsername" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="registerUsername" placeholder="Cree un usuario" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerEmail" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="registerEmail" placeholder="Ingrese su correo" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="registerPassword" placeholder="Cree una contraseña" required>
-                            </div>
-                            <button type="submit" class="btn btn-success w-100">Registrar</button>
-                        </form>
-                    </div>
+			    <form id="registerForm" >
+  				  <div class="mb-3">
+        				<label for="registerUsername" class="form-label">Usuario</label>
+      			 		<input type="text" class="form-control" id="registerUsername" name="usuario" placeholder="Cree un usuario" required>
+  				  </div>
+    				<div class="mb-3">
+      				  <label for="registerEmail" class="form-label">Correo Electrónico</label>
+      				  <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
+   				 </div>
+   				 <div class="mb-3">
+    				    <label for="registerPassword" class="form-label">Contraseña</label>
+    				    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
+   				  </div>
+   				  <button type="submit" class="btn btn-success w-100">Registrar</button>
+			  </form>
+
+			<script>
+			document.getElementById('registerForm').addEventListener('submit', function(event) {
+			    event.preventDefault(); // Evita el envío predeterminado del formulario
+
+			    // Capturar los datos ingresados (opcional)
+			    const usuario = document.getElementById('registerUsername').value;
+			    const email = document.getElementById('registerEmail').value;
+			    const password = document.getElementById('registerPassword').value;
+
+			    if (usuario && email && password) {
+			        alert('¡Registro exitoso! Redirigiendo...');
+			        window.location.href = 'https://panchoalvarezg.github.io/panchoalvarez.github.io/secundaria.html'; // Redirige a otra página
+			    } else {
+			        alert('Por favor, complete todos los campos.');
+ 			   }
+			});
+			</script>
+		  </div>
                 </li>
             </ul>
         </div>
@@ -187,20 +205,35 @@
 
         <!-- Texto sobre pesca ilegal -->
         <div id="content" class="mt-4">
-            <p class="text-es">Pesca ilegal, no declarada y no reglamentada (pesca INDNR) es un término amplio que engloba una gran variedad de actividades pesqueras. La pesca INDNR existe en todos los tipos y dimensiones de la pesca, ocurre tanto en alta mar como en zonas bajo jurisdicción nacional, afecta a todos los aspectos y etapas de la captura y utilización del pescado y, en ocasiones, puede estar asociada con la delincuencia organizada.
-	    Nuestro objetivo es combatir la idea de indice 14.4, De aquí a 2020, reglamentar eficazmente la explotación pesquera y poner fin a la pesca excesiva, la pesca ilegal, no declarada y no reglamentada y las prácticas pesqueras destructivas, y aplicar planes de gestión con fundamento científico a fin de restablecer las poblaciones de peces en el plazo más breve posible, al menos alcanzando niveles que puedan producir el máximo rendimiento sostenible de acuerdo con sus características biológicas.</p>
-            <p class="text-en d-none">Illegal, unreported and unregulated fishing (IUU fishing) is a broad term that encompasses a wide variety of fishing activities. IUU fishing exists in all types and dimensions of fishing, occurs both on the high seas and in areas under national jurisdiction, affects all aspects and stages of fish capture and use, and may sometimes be associated with organized crime.
-	    Our goal is to combat the idea of ​​index 14.4, By 2020, effectively regulate fishing exploitation and put an end to overfishing, illegal, unreported and unregulated fishing and destructive fishing practices, and implement sound management plans. in order to restore fish stocks in the shortest possible time, at least reaching levels that can produce the maximum sustainable yield in accordance with their biological characteristics.</p>
-            <p class="text-th d-none">การประมงที่ผิดกฎหมาย ขาดการรายงาน และไร้การควบคุม (ประมง IUU) เป็นคำกว้างๆ ที่ครอบคลุมกิจกรรมการประมงที่หลากหลาย การทำประมง IUU เกิดขึ้นในทุกประเภทและมิติของการประมง เกิดขึ้นทั้งในทะเลหลวงและพื้นที่ภายใต้เขตอำนาจศาลของประเทศ ส่งผลกระทบต่อการจับและการใช้ปลาทุกด้านและทุกขั้นตอน และบางครั้งอาจเกี่ยวข้องกับการก่ออาชญากรรม 
-	    เป้าหมายของเราคือการต่อสู้กับแนวคิดของดัชนี 14.4 ภายในปี 2563 ควบคุมการแสวงหาผลประโยชน์จากการประมงอย่างมีประสิทธิภาพและยุติการทำประมงมากเกินไป การประมงที่ผิดกฎหมาย ขาดการรายงาน และไร้การควบคุม และการประมงแบบทำลายล้าง และดำเนินการตามแผนการจัดการที่ดีเพื่อฟื้นฟูปริมาณปลา ในเวลาอันสั้นที่สุดเท่าที่จะเป็นไปได้ อย่างน้อยก็ถึงระดับที่สามารถให้ผลผลิตที่ยั่งยืนสูงสุดตามลักษณะทางชีวภาพ</p>
-            <p class="text-zh d-none">非法、未報告和無管制捕撈（IUU 捕撈）是一個廣泛的術語，涵蓋多種捕撈活動。 IUU 捕撈存在於所有類型和規模的捕撈活動中，發生在公海和國家管轄範圍內的區域，影響魚類捕撈和使用的各個方面和階段，有時可能與有組織犯罪有關。
-	    我們的目標是打擊指標14.4的想法，到2020年，有效規範捕撈開發，杜絕過度捕撈、非法、不報告、不管制捕撈和破壞性捕撈行為，並實施健全的管理計劃，以恢復魚類資源。在盡可能短的時間內，至少達到能夠根據其生物學特性產生最大可持續產量的水平。</p>
-         </div>
+            <p class="text-es">Pesca ilegal, no declarada y no reglamentada (pesca INDNR) es un término amplio que engloba una gran variedad de actividades pesqueras. La pesca INDNR existe en todos los tipos y dimensiones de la pesca, ocurre tanto en alta mar como en zonas bajo jurisdicción nacional, afecta a todos los aspectos y etapas de la captura y utilización del pescado y, en ocasiones, puede estar asociada con la delincuencia organizada.</p>
+            <p class="text-en d-none">Illegal, unreported and unregulated fishing (IUU fishing) is a broad term that encompasses a wide variety of fishing activities. IUU fishing exists in all types and dimensions of fishing, occurs both on the high seas and in areas under national jurisdiction, affects all aspects and stages of fish capture and use, and may sometimes be associated with organized crime.</p>
+            <p class="text-th d-none">การประมงที่ผิดกฎหมาย ขาดการรายงาน และไร้การควบคุม (ประมง IUU) เป็นคำกว้างๆ ที่ครอบคลุมกิจกรรมการประมงที่หลากหลาย การทำประมง IUU เกิดขึ้นในทุกประเภทและมิติของการประมง เกิดขึ้นทั้งในทะเลหลวงและพื้นที่ภายใต้เขตอำนาจศาลของประเทศ ส่งผลกระทบต่อการจับและการใช้ปลาทุกด้านและทุกขั้นตอน และบางครั้งอาจเกี่ยวข้องกับการก่ออาชญากรรม</p>
+            <p class="text-zh d-none">非法、未報告和無管制捕撈（IUU 捕撈）是一個廣泛的術語，涵蓋多種捕撈活動。 IUU 捕撈存在於所有類型和規模的捕撈活動中，發生在公海和國家管轄範圍內的區域，影響魚類捕撈和使用的各個方面和階段，有時可能與有組織犯罪有關。</p>
+        </div>
+
+        <div id="content" class="mt-4">
+            <p class="text-es">Nuestro objetivo es combatir la idea de indice 14.4, De aquí a 2020, reglamentar eficazmente la explotación pesquera y poner fin a la pesca excesiva, la pesca ilegal, no declarada y no reglamentada y las prácticas pesqueras destructivas, y aplicar planes de gestión con fundamento científico a fin de restablecer las poblaciones de peces en el plazo más breve posible, al menos alcanzando niveles que puedan producir el máximo rendimiento sostenible de acuerdo con sus características biológicas.</p>
+            <p class="text-en d-none">Our goal is to combat the idea of ​​index 14.4, By 2020, effectively regulate fishing exploitation and put an end to overfishing, illegal, unreported and unregulated fishing and destructive fishing practices, and implement sound management plans. in order to restore fish stocks in the shortest possible time, at least reaching levels that can produce the maximum sustainable yield in accordance with their biological characteristics.</p>
+            <p class="text-th d-none">เป้าหมายของเราคือการต่อสู้กับแนวคิดของดัชนี 14.4 ภายในปี 2563 ควบคุมการแสวงหาผลประโยชน์จากการประมงอย่างมีประสิทธิภาพและยุติการทำประมงมากเกินไป การประมงที่ผิดกฎหมาย ขาดการรายงาน และไร้การควบคุม และการประมงแบบทำลายล้าง และดำเนินการตามแผนการจัดการที่ดีเพื่อฟื้นฟูปริมาณปลา ในเวลาอันสั้นที่สุดเท่าที่จะเป็นไปได้ อย่างน้อยก็ถึงระดับที่สามารถให้ผลผลิตที่ยั่งยืนสูงสุดตามลักษณะทางชีวภาพ</p>
+            <p class="text-zh d-none">我們的目標是打擊指標14.4的想法，到2020年，有效規範捕撈開發，杜絕過度捕撈、非法、不報告、不管制捕撈和破壞性捕撈行為，並實施健全的管理計劃，以恢復魚類資源。在盡可能短的時間內，至少達到能夠根據其生物學特性產生最大可持續產量的水平。</p>
+        </div>
+	    
     </div>
 
 
 
+    <title>Mapa Mundial</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w&callback=initMap"></script>
 
+    <style>
+        #map {
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            width: 100%; /* Ocupa todo el ancho */
+        }
+    </style>
+</body>
+<body>
+    <div id="map"></div>
 
     <script>
 
@@ -237,52 +270,76 @@
             this.reset();
         });
 
+        function initMap() {
+            // Crear el mapa y centrarlo en China
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas del centro de China
+                mapTypeId: "terrain",
+            });
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w"></script>
+            // Cargar el archivo GeoJSON
+            map.data.loadGeoJson('china.geojson');
 
-    <style>
-        /* Define el estilo para el mapa */
-        #map {
-            height: 100vh; /* Altura completa de la pantalla */
-            width: 100%; /* Ancho completo */
+            // Estilo del polígono
+            map.data.setStyle({
+                fillColor: "#FF0000", // Relleno rojo
+                fillOpacity: 0.4,   // Opacidad del relleno
+                strokeColor: "#FF0000", // Borde rojo
+                strokeWeight: 2,     // Grosor del borde
+            });
+
+            // Mostrar información del polígono al hacer clic
+            map.data.addListener("click", function (event) {
+                const name = event.feature.getProperty("name");
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<strong>${name}</strong>`,
+                    position: event.latLng,
+                });
+                infoWindow.open(map);
+            });
         }
-    </style>
-</head>
-<body>
 
-<h1>Mapa de China Delimitado</h1>
+        // Inicializar el mapa
+        window.onload = initMap;
 
-<!-- Contenedor para el mapa -->
-<div id="map"></div>
-
-<script>
-    let map;
-
-    function initMap() {
-        // Configuración inicial del mapa
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas de China
-            zoom: 4 // Nivel de zoom
-        });
-
-        // URL del GeoJSON con la frontera de China (puedes usar otra fuente si lo deseas)
-        const geoJsonUrl = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json';
-
-        // Cargar el archivo GeoJSON
-        map.data.loadGeoJson(geoJsonUrl);
-
-        // Estilo de la frontera de China
-        map.data.setStyle({
-            fillColor: 'rgba(255, 0, 0, 0.2)', // Color de relleno (rojo semitransparente)
-            strokeColor: '#FF0000', // Color de la línea de la frontera
-            strokeWeight: 2 // Grosor de la línea
-        });
-    }
-
-    // Esperar a que la página cargue para inicializar el mapa
-    window.onload = initMap;
-</script>
+        function setLanguage(lang) {
+            // Ocultar todos los textos
+            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
+            
+            // Mostrar el texto en el idioma seleccionado
+            document.querySelector(`.text-${lang}`).classList.remove("d-none");
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Registro de Barcos</h1>
+        <form action="procesar_formulario.php" method="POST">
+            <div class="mb-3">
+                <label for="nombre_empresa" class="form-label">Nombre de la Empresa</label>
+                <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre_barco" class="form-label">Nombre del Barco</label>
+                <input type="text" class="form-control" id="nombre_barco" name="nombre_barco" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="longitud" class="form-label">Longitud</label>
+                <input type="number" step="0.0000001" class="form-control" id="longitud" name="longitud" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="latitud" class="form-label">Latitud</label>
+                <input type="number" step="0.0000001" class="form-control" id="latitud" name="latitud" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Registrar Barco</button>
+        </form>
+    </div>
 </body>
 </html>
