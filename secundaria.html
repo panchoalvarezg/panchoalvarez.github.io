@@ -7,14 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
-	#formulario {
-	  width: 50%;
-	  margin: 20px auto;
- 	 padding: 20px;
- 	 border: 1px solid #ccc;
- 	 border-radius: 10px;
-	 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
         body {
             background-color: #a8c9e9;
             text-align: center;
@@ -25,7 +17,7 @@
             object-fit: cover;
         }
         .lang-buttons {
-            margin: 15px 0;
+            margin: 50px 0;
         }
         .dropdown-menu {
             background-color: #e0e3e9;
@@ -65,7 +57,7 @@
             position: fixed; /* Fija la barra en la parte superior */
             top: 0;
             width: 100%;
-            background-color: #333; /* Color de fondo */
+            background-color: #FFFFFF; /* Color de fondo */
             color: white; /* Color del texto */
             display: flex;
             justify-content: space-between;
@@ -89,7 +81,7 @@
 
         .navbar .nav-links a {
             text-decoration: none;
-            color: white;
+            color: black;
             font-size: 1rem;
             transition: color 0.3s;
         }
@@ -116,6 +108,7 @@
     </style>
 </head>
 <body>
+	<!-- Botones de idioma -->
      <div class="lang-buttons">
             <button class="btn btn-primary btn-sm" onclick="setLanguage('es')">Español</button>
             <button class="btn btn-secondary btn-sm" onclick="setLanguage('en')">English</button>
@@ -125,59 +118,72 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Mi Sitio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Usuario
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                            <!-- Formulario de Login -->
-                            <h5>Iniciar Sesión</h5>
-                            <form action="login.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="loginUsername" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Ingrese su usuario" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Ingrese su contraseña" required>
-                                </div>
-                                <button onclick="location.href='secundaria.html'">Entrar</button>
-                            </form>
-                            <hr>
-                            <!-- Formulario de Registro -->
-                            <h5>Registro</h5>
-                            <form action="register.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="registerUsername" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="registerUsername" name="username" placeholder="Cree un usuario" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="registerEmail" class="form-label">Correo Electrónico</label>
-                                    <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="registerPassword" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
-                                </div>
-                                <button type="submit" class="btn btn-success w-100">Registrar</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav-links navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <h5>Iniciar Sesión</h5>
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginUsername" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Ingrese su contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
+                        <hr>
+                        <h5>Registro</h5>
+                        <form id="registerForm">
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="registerUsername" placeholder="Cree un usuario" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="registerEmail" placeholder="Ingrese su correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="registerPassword" placeholder="Cree una contraseña" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Registrar</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
-
-</body>
-<body>
+	     
     <div class="container">
         <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
+
+        <!-- Carrusel -->
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.fao.org/images/rlclibraries/news/pesca-ilegal.jpg?sfvrsn=657478de_3" class="d-block w-100" alt="Imagen 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
 
         <!-- Texto sobre pesca ilegal -->
         <div id="content" class="mt-4">
@@ -207,11 +213,45 @@
             width: 100%; /* Ocupa todo el ancho */
         }
     </style>
-</head>
+</body>
 <body>
     <div id="map"></div>
 
     <script>
+
+        // Manejo del registro
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ username, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registro exitoso. ¡Ahora puedes iniciar sesión!');
+            this.reset();
+        });
+
+        // Manejo del login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                alert(`¡Bienvenido, ${user.username}!`);
+            } else {
+                alert('Usuario o contraseña incorrectos.');
+            }
+
+            this.reset();
+        });
+
         function initMap() {
             // Crear el mapa y centrarlo en China
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -244,34 +284,7 @@
 
         // Inicializar el mapa
         window.onload = initMap;
-    </script>
 
-
-<body>
-  <h1>Ubicación de Barcos</h1>
-  <form id="formulario">
-    <label for="longitud">Longitud:</label>
-    <input type="number" id="longitud" required>
-    <br>
-    <label for="latitud">Latitud:</label>
-    <input type="number" id="latitud" required>
-    <br>
-    <label for="nombre-empresa">Nombre de la empresa:</label>
-    <input type="text" id="nombre-empresa" required>
-    <br>
-    <label for="nombre-barco">Nombre del barco:</label>
-    <input type="text" id="nombre-barco" required>
-    <br>
-    <button id="enviar">Enviar</button>
-  </form>
-  <div id="mapa"></div>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="script.js"></script>
-</body>
-
-
-   <script>
         function setLanguage(lang) {
             // Ocultar todos los textos
             document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
@@ -282,5 +295,5 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+</body>
 </html>
