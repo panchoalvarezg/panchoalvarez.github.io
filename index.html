@@ -252,38 +252,50 @@
             this.reset();
         });
 
-        function initMap() {
-            // Crear el mapa y centrarlo en China
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 4,
-                center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas del centro de China
-                mapTypeId: "terrain",
-            });
+<script>
+    let map;
 
-            // Cargar el archivo GeoJSON
-            map.data.loadGeoJson('china.geojson');
+    function initMap() {
+        // Configurar el mapa
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 35.8617, lng: 104.1954 }, 
+            zoom: 4
+        });
 
-            // Estilo del polígono
-            map.data.setStyle({
-                fillColor: "#FF0000", // Relleno rojo
-                fillOpacity: 0.4,   // Opacidad del relleno
-                strokeColor: "#FF0000", // Borde rojo
-                strokeWeight: 2,     // Grosor del borde
-            });
+        // Coordenadas de la frontera de China (simplificada para este ejemplo)
+        const chinaBorders = [
+            { lat: 53.5609, lng: 73.0272 }, 
+            { lat: 49.152, lng: 87.033 }, 
+            { lat: 41.792, lng: 79.135 }, 
+            { lat: 39.875, lng: 111.825 }, 
+            { lat: 31.797, lng: 121.385 }, 
+            { lat: 21.610, lng: 108.301 }, 
+            { lat: 18.280, lng: 109.618 }, 
+            { lat: 22.093, lng: 113.545 }, 
+            { lat: 27.763, lng: 117.485 }, 
+            { lat: 31.235, lng: 120.882 }, 
+            { lat: 40.731, lng: 117.269 }, 
+            { lat: 48.146, lng: 131.916 }
+        ];
 
-            // Mostrar información del polígono al hacer clic
-            map.data.addListener("click", function (event) {
-                const name = event.feature.getProperty("name");
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<strong>${name}</strong>`,
-                    position: event.latLng,
-                });
-                infoWindow.open(map);
-            });
-        }
+        // Crear el polígono de la frontera de China
+        const chinaPolygon = new google.maps.Polygon({
+            paths: chinaBorders,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35
+        });
 
-        // Inicializar el mapa
-        window.onload = initMap;
+        // Añadir el polígono al mapa
+        chinaPolygon.setMap(map);
+    }
+
+    window.onload = initMap;
+</script>
+
+
 
         function setLanguage(lang) {
             // Ocultar todos los textos
