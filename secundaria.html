@@ -296,6 +296,199 @@
         });
 
 
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo para el chatbot */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #chatbot-header {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+
+        .chatbot-message {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            text-align: right;
+            color: #0d6efd;
+        }
+
+        .bot-message {
+            text-align: left;
+            color: #495057;
+        }
+
+        #chatbot-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ced4da;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        #chatbot-send {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón para abrir/cerrar chatbot -->
+    <button id="chatbot-toggle">
+        💬
+    </button>
+
+    <!-- Contenedor del chatbot -->
+    <div id="chatbot-container">
+        <div id="chatbot-header">Asistente Virtual</div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu mensaje..." />
+            <button id="chatbot-send">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Referencias a los elementos
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+
+        // Mostrar/ocultar chatbot
+        chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.style.display =
+                chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '' 
+                ? 'flex' 
+                : 'none';
+        });
+
+        // Función para agregar mensajes al chat
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chatbot-message', sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = message;
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Respuesta básica del chatbot
+        function getBotResponse(message) {
+            if (message.toLowerCase().includes('precio')) {
+                return 'Nuestros deshumidificadores comienzan desde $64.990. ¿Te gustaría saber más sobre su funcionamiento?';
+            } else if (message.toLowerCase().includes('envio')) {
+                return 'Ofrecemos envíos gratuitos dentro de la Región Metropolitana.';
+            } else {
+                return 'Soy tu asistente virtual HUMEDIN. ¿En qué puedo ayudarte con nuestros deshumidificadores?';
+            }
+        }
+
+        // Enviar mensaje
+        chatbotSend.addEventListener('click', () => {
+            const userMessage = chatbotInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user');
+                chatbotInput.value = '';
+                const botResponse = getBotResponse(userMessage);
+                setTimeout(() => addMessage(botResponse, 'bot'), 500);
+            }
+        });
+
+        // Enviar mensaje al presionar Enter
+        chatbotInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                chatbotSend.click();
+            }
+        });
+    </script>
+</body>
+
+
+
+    <!-- Pie de página -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <!-- Derechos reservados -->
+            <p class="mb-2">&copy; 2024 HUMEDEX. Todos los derechos reservados.</p>
+            
+            <!-- Redes Sociales -->
+            <div class="mb-3">
+                <a href="https://www.instagram.com/tu_cuenta" target="_blank" class="text-white me-3">
+                    <i class="bi bi-instagram fs-4"></i>
+                </a>
+                <a href="https://twitter.com/tu_cuenta" target="_blank" class="text-white me-3">
+                    <i class="bi bi-twitter fs-4"></i>
+                </a>
+                <a href="https://www.tiktok.com/@tu_cuenta" target="_blank" class="text-white me-3">
+                    <i class="bi bi-tiktok fs-4"></i>
+                </a>
+            </div>
+            
+            <!-- Contacto por WhatsApp -->
+            <a href="https://wa.me/1234567890" target="_blank" class="btn btn-success">
+                <i class="bi bi-whatsapp me-2"></i>Contactar por WhatsApp
+            </a>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
