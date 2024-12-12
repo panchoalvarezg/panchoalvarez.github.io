@@ -115,67 +115,75 @@
             <button class="btn btn-warning btn-sm" onclick="setLanguage('th')">ไทย</button>
             <button class="btn btn-dark btn-sm" onclick="setLanguage('zh')">中文</button>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">FJSA</a>
-            <ul class="nav-links navbar-nav ms-auto">
-               <li class="nav-item dropdown">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Marca de la empresa -->
+        <a class="navbar-brand" href="#">FJSA</a>
+
+        <!-- Botón para el menú móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenedor del menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Categorías del menú -->
+            <ul class="navbar-nav me-auto">
+                <!-- Categoría 1: Archivos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="archivosMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Archivos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="archivosMenu">
+                        <li><a class="dropdown-item" href="#archivos1">Archivos recientes</a></li>
+                        <li><a class="dropdown-item" href="#archivos2">Archivos compartidos</a></li>
+                        <li><a class="dropdown-item" href="#archivos3">Todos los archivos</a></li>
+                    </ul>
+                </li>
+
+                <!-- Categoría 2: Documentos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="documentosMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Documentos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="documentosMenu">
+                        <li><a class="dropdown-item" href="#documentos1">Mis documentos</a></li>
+                        <li><a class="dropdown-item" href="#documentos2">Documentos importantes</a></li>
+                        <li><a class="dropdown-item" href="#documentos3">Documentos compartidos</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Botón de cierre de sesión -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Usuario
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                        <h5>Iniciar Sesión</h5>
-                        <form id="loginForm" >
-                            <div class="mb-3">
-                                <label for="loginUsername" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Ingrese su contraseña" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                        </form>
-                        <hr>
-                        <h5>Registro</h5>
-			    <form id="registerForm" >
-  				  <div class="mb-3">
-        				<label for="registerUsername" class="form-label">Usuario</label>
-      			 		<input type="text" class="form-control" id="registerUsername" name="usuario" placeholder="Cree un usuario" required>
-  				  </div>
-    				<div class="mb-3">
-      				  <label for="registerEmail" class="form-label">Correo Electrónico</label>
-      				  <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Ingrese su correo" required>
-   				 </div>
-   				 <div class="mb-3">
-    				    <label for="registerPassword" class="form-label">Contraseña</label>
-    				    <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Cree una contraseña" required>
-   				  </div>
-   				  <button type="submit" class="btn btn-success w-100">Registrar</button>
-			  </form>
-
-			<script>
-			document.getElementById('registerForm').addEventListener('submit', function(event) {
-			    event.preventDefault(); // Evita el envío predeterminado del formulario
-
-			    // Capturar los datos ingresados (opcional)
-			    const usuario = document.getElementById('registerUsername').value;
-			    const email = document.getElementById('registerEmail').value;
-			    const password = document.getElementById('registerPassword').value;
-
-			    if (usuario && email && password) {
-			        alert('¡Registro exitoso! Redirigiendo...');
-			        window.location.href = 'https://panchoalvarezg.github.io/panchoalvarez.github.io/secundaria.html'; // Redirige a otra página
-			    } else {
-			        alert('Por favor, complete todos los campos.');
- 			   }
-			});
-			</script>
-		  </div>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <li><a class="dropdown-item" href="#perfil">Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" id="logoutButton" href="#">Cerrar sesión</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<!-- Bootstrap JS Bundle con Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Lógica para cerrar la sesión
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        alert('Cerrando sesión...');
+        // Aquí puedes limpiar la sesión o hacer una llamada a la API para cerrar la sesión
+        window.location.href = 'login.html'; // Redirige al usuario a la página de inicio de sesión
+    });
+</script>
+
 	     
     <div class="container">
         <h1>Pesca ilegal, no declarada y no reglamentada (pesca INDNR)</h1>
