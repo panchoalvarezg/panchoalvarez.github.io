@@ -238,65 +238,51 @@
             this.reset();
         });
 
-<script>
 
-    <title>Mapa Mundial</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqLoBK7UWeZo3WdtzgaTUYtWa8gCS9U4w"></script>
 
- <style>
+    <style>
+        /* Define el estilo para el mapa */
         #map {
-            height: 100vh; /* Ocupa toda la altura de la ventana */
-            width: 100%; /* Ocupa todo el ancho */
+            height: 100vh; /* Altura completa de la pantalla */
+            width: 100%; /* Ancho completo */
         }
     </style>
-
+</head>
 <body>
-    <div id="map"></div>
 
+<h1>Mapa de China Delimitado</h1>
+
+<!-- Contenedor para el mapa -->
+<div id="map"></div>
 
 <script>
     let map;
 
     function initMap() {
-        // Configurar el mapa
+        // Configuración inicial del mapa
         map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 35.8617, lng: 104.1954 }, 
-            zoom: 4
+            center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas de China
+            zoom: 4 // Nivel de zoom
         });
 
-        // Coordenadas de la frontera de China (simplificada para este ejemplo)
-        const chinaBorders = [
-            { lat: 53.5609, lng: 73.0272 }, 
-            { lat: 49.152, lng: 87.033 }, 
-            { lat: 41.792, lng: 79.135 }, 
-            { lat: 39.875, lng: 111.825 }, 
-            { lat: 31.797, lng: 121.385 }, 
-            { lat: 21.610, lng: 108.301 }, 
-            { lat: 18.280, lng: 109.618 }, 
-            { lat: 22.093, lng: 113.545 }, 
-            { lat: 27.763, lng: 117.485 }, 
-            { lat: 31.235, lng: 120.882 }, 
-            { lat: 40.731, lng: 117.269 }, 
-            { lat: 48.146, lng: 131.916 }
-        ];
+        // URL del GeoJSON con la frontera de China (puedes usar otra fuente si lo deseas)
+        const geoJsonUrl = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries/CHN.geo.json';
 
-        // Crear el polígono de la frontera de China
-        const chinaPolygon = new google.maps.Polygon({
-            paths: chinaBorders,
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35
+        // Cargar el archivo GeoJSON
+        map.data.loadGeoJson(geoJsonUrl);
+
+        // Estilo de la frontera de China
+        map.data.setStyle({
+            fillColor: 'rgba(255, 0, 0, 0.2)', // Color de relleno (rojo semitransparente)
+            strokeColor: '#FF0000', // Color de la línea de la frontera
+            strokeWeight: 2 // Grosor de la línea
         });
-
-        // Añadir el polígono al mapa
-        chinaPolygon.setMap(map);
     }
 
+    // Esperar a que la página cargue para inicializar el mapa
     window.onload = initMap;
 </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
