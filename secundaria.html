@@ -125,7 +125,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                         <h5>Iniciar Sesión</h5>
-                        <form id="loginForm" action="html/otra_pagina.html" method="POST">
+                        <form id="loginForm" >
                             <div class="mb-3">
                                 <label for="loginUsername" class="form-label">Usuario</label>
                                 <input type="text" class="form-control" id="loginUsername" placeholder="Ingrese su usuario" required>
@@ -138,7 +138,7 @@
                         </form>
                         <hr>
                         <h5>Registro</h5>
-			    <form id="registerForm" action="main/index.html" method="POST">
+			    <form id="registerForm" >
   				  <div class="mb-3">
         				<label for="registerUsername" class="form-label">Usuario</label>
       			 		<input type="text" class="form-control" id="registerUsername" name="usuario" placeholder="Cree un usuario" required>
@@ -153,6 +153,24 @@
    				  </div>
    				  <button type="submit" class="btn btn-success w-100">Registrar</button>
 			  </form>
+
+			<script>
+			document.getElementById('registerForm').addEventListener('submit', function(event) {
+			    event.preventDefault(); // Evita el envío predeterminado del formulario
+
+			    // Capturar los datos ingresados (opcional)
+			    const usuario = document.getElementById('registerUsername').value;
+			    const email = document.getElementById('registerEmail').value;
+			    const password = document.getElementById('registerPassword').value;
+
+			    if (usuario && email && password) {
+			        alert('¡Registro exitoso! Redirigiendo...');
+			        window.location.href = 'main/index.html'; // Redirige a otra página
+			    } else {
+			        alert('Por favor, complete todos los campos.');
+ 			   }
+			});
+			</script>
 		  </div>
                 </li>
             </ul>
