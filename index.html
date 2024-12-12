@@ -265,46 +265,143 @@
             this.reset();
         });
 
-        function initMap() {
-            // Crear el mapa y centrarlo en China
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 4,
-                center: { lat: 35.8617, lng: 104.1954 }, // Coordenadas aproximadas del centro de China
-                mapTypeId: "terrain",
-            });
 
-            // Cargar el archivo GeoJSON
-            map.data.loadGeoJson('china.geojson');
-
-            // Estilo del polígono
-            map.data.setStyle({
-                fillColor: "#FF0000", // Relleno rojo
-                fillOpacity: 0.4,   // Opacidad del relleno
-                strokeColor: "#FF0000", // Borde rojo
-                strokeWeight: 2,     // Grosor del borde
-            });
-
-            // Mostrar información del polígono al hacer clic
-            map.data.addListener("click", function (event) {
-                const name = event.feature.getProperty("name");
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<strong>${name}</strong>`,
-                    position: event.latLng,
-                });
-                infoWindow.open(map);
-            });
+    <style>
+        body {
+            font-family: Arial, sans-serif;
         }
-
-        // Inicializar el mapa
-        window.onload = initMap;
-
-        function setLanguage(lang) {
-            // Ocultar todos los textos
-            document.querySelectorAll("#content p").forEach(p => p.classList.add("d-none"));
-            
-            // Mostrar el texto en el idioma seleccionado
-            document.querySelector(`.text-${lang}`).classList.remove("d-none");
+        
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            flex-direction: column;
         }
+        
+        #chatbot-header {
+            background-color: #0077cc;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        
+        #chatbot-messages {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        #chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        
+        #user-message {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0 0 0 10px;
+        }
+        
+        #send-button {
+            padding: 10px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 0 10px 0;
+        }
+        
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0077cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div id="chatbot">
+    <div id="chatbot-header">Chatbot - Pesca Ilegal</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+        <input type="text" id="user-message" placeholder="Escribe tu mensaje...">
+        <button id="send-button">Enviar</button>
+    </div>
+</div>
+
+<div id="chatbot-toggle">💬</div>
+
+<script>
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbot = document.getElementById('chatbot');
+    const userMessageInput = document.getElementById('user-message');
+    const sendButton = document.getElementById('send-button');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+
+    const responses = {
+        "que es la pesca ilegal": "La pesca ilegal se refiere a la captura de peces en violación de las leyes y regulaciones pesqueras, como pescar en zonas restringidas o utilizar métodos prohibidos.",
+        "como combatir la pesca ilegal": "Se combate mediante la implementación de leyes más estrictas, el uso de tecnología de monitoreo satelital y la cooperación internacional para controlar las actividades de pesca.",
+        "donde ocurre la mayor pesca ilegal": "El mayor índice de pesca ilegal se encuentra en Asia Oriental, debido a la gran demanda de productos pesqueros y la dificultad para controlar la actividad pesquera en la región."
+    };
+
+    chatbotToggle.addEventListener('click', () => {
+        chatbot.style.display = chatbot.style.display === 'none' ? 'flex' : 'none';
+    });
+
+    sendButton.addEventListener('click', () => {
+        handleUserMessage();
+    });
+
+    userMessageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleUserMessage();
+        }
+    });
+
+    function handleUserMessage() {
+        const userMessage = userMessageInput.value.trim().toLowerCase();
+        if (!userMessage) return;
+
+        addMessage('Usuario', userMessage);
+        userMessageInput.value = '';
+
+        const response = getResponse(userMessage);
+        setTimeout(() => addMessage('Chatbot', response), 500);
+    }
+
+    function addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.style.marginBottom = '10px';
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatbotMessages.appendChild(messageElement);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getResponse(userMessage) {
+        for (const key in responses) {
+            if (userMessage.includes(key)) {
+                return responses[key];
+            }
+        }
+        return "Lo siento, no entiendo la pregunta. Intenta preguntar sobre 'qué es la pesca ilegal', 'cómo combatir la pesca ilegal' o 'dónde ocurre la mayor pesca ilegal'.";
+    }
+</script>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
