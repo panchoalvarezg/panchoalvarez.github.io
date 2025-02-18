@@ -1,12 +1,13 @@
 {
-  "name": "trade-simulator",
+  "name": "currency-converter",
   "version": "1.0.0",
-  "description": "Trade Simulator Microservice",
-  "main": "trade-simulator.js",
+  "description": "Currency Converter Microservice",
+  "main": "currency-converter.js",
   "scripts": {
-    "start": "node trade-simulator.js"
+    "start": "node currency-converter.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1"
   }
 }
