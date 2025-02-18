@@ -1,0 +1,12 @@
+{
+  "name": "trade-simulator",
+  "version": "1.0.0",
+  "description": "Trade Simulator Microservice",
+  "main": "trade-simulator.js",
+  "scripts": {
+    "start": "node trade-simulator.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
