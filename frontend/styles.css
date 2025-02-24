@@ -1,13 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #fff;
     margin: 0;
     padding: 0;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
 }
 
 .header-container {
@@ -47,8 +43,6 @@ nav ul li a {
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     padding: 20px;
