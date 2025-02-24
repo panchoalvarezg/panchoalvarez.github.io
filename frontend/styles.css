@@ -1,74 +1,35 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: #fff;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
+.header-container {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    color: #333;
-}
-
-.section {
-    width: 48%;
-}
-
-h1, h2 {
-    color: #fff;
-    text-align: center;
-}
-
-#exchange-rates, #simulator {
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-input, select, button {
-    margin-bottom: 10px;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
+    align-items: center;
     background-color: #2a5298;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
     color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #1e3c72;
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
-#result, #trade-result {
-    margin-top: 20px;
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
     font-size: 18px;
-    font-weight: bold;
-    text-align: center;
 }
 
-#balance {
-    font-weight: bold;
-    color: #f39c12;
-}
-
-canvas {
-    margin-top: 20px;
+.user {
+    font-size: 18px;
+    color: #fff;
 }
