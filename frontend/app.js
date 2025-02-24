@@ -4,22 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const toCurrency = document.getElementById('to-currency');
     const resultDiv = document.getElementById('result');
 
-    // Fetch available currencies
-    fetch('/api/currencies')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(currency => {
-                const option1 = document.createElement('option');
-                option1.value = currency;
-                option1.textContent = currency;
-                fromCurrency.appendChild(option1);
+    // Divisas predefinidas
+    const predefinedCurrencies = ['USD', 'CLP', 'EUR'];
 
-                const option2 = document.createElement('option');
-                option2.value = currency;
-                option2.textContent = currency;
-                toCurrency.appendChild(option2);
-            });
-        });
+    // Agregar divisas predefinidas a los selectores
+    predefinedCurrencies.forEach(currency => {
+        const option1 = document.createElement('option');
+        option1.value = currency;
+        option1.textContent = currency;
+        fromCurrency.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = currency;
+        option2.textContent = currency;
+        toCurrency.appendChild(option2);
+    });
 
     form.addEventListener('submit', event => {
         event.preventDefault();
