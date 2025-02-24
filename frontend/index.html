@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convertidor de Divisas</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -16,7 +17,68 @@
             <button type="submit">Convertir</button>
         </form>
         <div id="result"></div>
+        <canvas id="currencyChart" width="400" height="200"></canvas>
     </div>
     <script src="app.js"></script>
+    <script>
+        const ctx = document.getElementById('currencyChart').getContext('2d');
+        const currencyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Fechas
+                datasets: [
+                    {
+                        label: 'EUR',
+                        data: [],
+                        borderColor: 'blue',
+                        fill: false
+                    },
+                    {
+                        label: 'USD',
+                        data: [],
+                        borderColor: 'green',
+                        fill: false
+                    },
+                    {
+                        label: 'CLP',
+                        data: [],
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+        function updateChart(data) {
+            currencyChart.data.labels = data.dates;
+            currencyChart.data.datasets[0].data = data.eur;
+            currencyChart.data.datasets[1].data = data.usd;
+            currencyChart.data.datasets[2].data = data.clp;
+            currencyChart.update();
+        }
+
+        // Simulación de actualización de la gráfica con datos en tiempo real
+        setInterval(() => {
+            fetch('/api/latest-prices')
+                .then(response => response.json())
+                .then(data => {
+                    updateChart(data);
+                });
+        }, 60000); // Actualiza cada 60 segundos
+    </script>
 </body>
 </html>
