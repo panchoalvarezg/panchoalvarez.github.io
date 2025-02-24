@@ -31,6 +31,22 @@
         </form>
         <div id="result"></div>
         <canvas id="currencyChart" width="400" height="200"></canvas>
+
+        <h2>Simulador de compra y venta de divisas</h2>
+        <div id="simulator">
+            <p>Saldo ficticio: <span id="balance">1000</span> USD</p>
+            <form id="trade-form">
+                <input type="number" id="trade-amount" placeholder="Amount" required>
+                <select id="trade-currency">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="CLP">CLP</option>
+                </select>
+                <button type="submit">Comprar</button>
+                <button type="button" id="sell-button">Vender</button>
+            </form>
+            <div id="trade-result"></div>
+        </div>
     </div>
     <script src="app.js"></script>
     <script>
@@ -109,6 +125,33 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('result').textContent = `Resultado: ${data.result}`;
+                });
+        });
+
+        let balance = 1000;
+
+        document.getElementById('trade-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const tradeAmount = parseFloat(document.getElementById('trade-amount').value);
+            const tradeCurrency = document.getElementById('trade-currency').value;
+            fetch(`/api/convert?amount=${tradeAmount}&from=USD&to=${tradeCurrency}`)
+                .then(response => response.json())
+                .then(data => {
+                    balance -= tradeAmount;
+                    document.getElementById('balance').textContent = balance.toFixed(2);
+                    document.getElementById('trade-result').textContent = `Compraste ${data.result} ${tradeCurrency}`;
+                });
+        });
+
+        document.getElementById('sell-button').addEventListener('click', function() {
+            const tradeAmount = parseFloat(document.getElementById('trade-amount').value);
+            const tradeCurrency = document.getElementById('trade-currency').value;
+            fetch(`/api/convert?amount=${tradeAmount}&from=${tradeCurrency}&to=USD`)
+                .then(response => response.json())
+                .then(data => {
+                    balance += data.result;
+                    document.getElementById('balance').textContent = balance.toFixed(2);
+                    document.getElementById('trade-result').textContent = `Vendiste ${tradeAmount} ${tradeCurrency} por ${data.result} USD`;
                 });
         });
     </script>
