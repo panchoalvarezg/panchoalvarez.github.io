@@ -9,7 +9,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Convertidor de divisa</h1>
+        <h1>Convertidor de divisas</h1>
+        <div id="exchange-rates">
+            <p>EUR: <span id="eur-rate"></span></p>
+            <p>USD: <span id="usd-rate"></span></p>
+            <p>CLP: <span id="clp-rate"></span></p>
+        </div>
         <form id="converter-form">
             <input type="number" id="amount" placeholder="Amount" required>
             <select id="from-currency"></select>
@@ -63,12 +68,19 @@
             }
         });
 
+        function updateExchangeRates(data) {
+            document.getElementById('eur-rate').textContent = data.eur[data.eur.length - 1];
+            document.getElementById('usd-rate').textContent = data.usd[data.usd.length - 1];
+            document.getElementById('clp-rate').textContent = data.clp[data.clp.length - 1];
+        }
+
         function updateChart(data) {
             currencyChart.data.labels = data.dates;
             currencyChart.data.datasets[0].data = data.eur;
             currencyChart.data.datasets[1].data = data.usd;
             currencyChart.data.datasets[2].data = data.clp;
             currencyChart.update();
+            updateExchangeRates(data);
         }
 
         // Simulación de actualización de la gráfica con datos en tiempo real
@@ -79,6 +91,18 @@
                     updateChart(data);
                 });
         }, 60000); // Actualiza cada 60 segundos
+
+        document.getElementById('converter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('from-currency').value;
+            const toCurrency = document.getElementById('to-currency').value;
+            fetch(`/api/convert?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').textContent = `Resultado: ${data.result}`;
+                });
+        });
     </script>
 </body>
 </html>
