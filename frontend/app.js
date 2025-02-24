@@ -2,12 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('converter-form');
     const fromCurrency = document.getElementById('from-currency');
     const toCurrency = document.getElementById('to-currency');
+    const amountInput = document.getElementById('amount');
     const resultDiv = document.getElementById('result');
 
-    // Divisas predefinidas
     const predefinedCurrencies = ['USD', 'CLP', 'EUR'];
 
-    // Agregar divisas predefinidas a los selectores
     predefinedCurrencies.forEach(currency => {
         const option1 = document.createElement('option');
         option1.value = currency;
@@ -20,16 +19,41 @@ document.addEventListener('DOMContentLoaded', () => {
         toCurrency.appendChild(option2);
     });
 
-    form.addEventListener('submit', event => {
-        event.preventDefault();
-        const amount = document.getElementById('amount').value;
+    const updateRates = () => {
+        fetch('/api/latest-prices')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('eur-rate').textContent = data.eur[data.eur.length - 1];
+                document.getElementById('usd-rate').textContent = data.usd[data.usd.length - 1];
+                document.getElementById('clp-rate').textContent = data.clp[data.clp.length - 1];
+                convertCurrency();
+            });
+    };
+
+    const convertCurrency = () => {
+        const amount = parseFloat(amountInput.value);
         const from = fromCurrency.value;
         const to = toCurrency.value;
+
+        if (isNaN(amount)) return;
 
         fetch(`/api/convert?amount=${amount}&from=${from}&to=${to}`)
             .then(response => response.json())
             .then(data => {
                 resultDiv.textContent = `${amount} ${from} = ${data.result} ${to}`;
             });
+    };
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        convertCurrency();
     });
+
+    fromCurrency.addEventListener('change', convertCurrency);
+    toCurrency.addEventListener('change', convertCurrency);
+    amountInput.addEventListener('input', convertCurrency);
+
+    // Actualizar las tasas de cambio cada 60 segundos
+    setInterval(updateRates, 60000);
+    updateRates(); // Primer llamada para actualizar inmediatamente
 });
