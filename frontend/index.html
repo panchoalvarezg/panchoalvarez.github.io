@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convertidor de Divisas</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .section {
-            width: 45%;
-        }
-    </style>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <div class="logo">MiForex</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Divisas</a></li>
+                    <li><a href="#">Compra</a></li>
+                    <li><a href="#">Venta</a></li>
+                    <li><a href="#">Perfil</a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <span>Usuario Ficticio</span>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
         <div class="section">
             <h1>Convertidor de divisas</h1>
@@ -40,7 +47,6 @@
                 <button type="submit">Convertir</button>
             </form>
             <div id="result"></div>
-            <canvas id="currencyChart" width="400" height="200"></canvas>
         </div>
         
         <div class="section">
@@ -63,111 +69,5 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
-        const ctx = document.getElementById('currencyChart').getContext('2d');
-        const currencyChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [], // Fechas
-                datasets: [
-                    {
-                        label: 'EUR',
-                        data: [],
-                        borderColor: 'blue',
-                        fill: false
-                    },
-                    {
-                        label: 'USD',
-                        data: [],
-                        borderColor: 'green',
-                        fill: false
-                    },
-                    {
-                        label: 'CLP',
-                        data: [],
-                        borderColor: 'red',
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day'
-                        }
-                    },
-                    y: {
-                        beginAtZero: false
-                    }
-                }
-            }
-        });
-
-        function updateExchangeRates(data) {
-            document.getElementById('eur-rate').textContent = data.eur[data.eur.length - 1];
-            document.getElementById('usd-rate').textContent = data.usd[data.usd.length - 1];
-            document.getElementById('clp-rate').textContent = data.clp[data.clp.length - 1];
-        }
-
-        function updateChart(data) {
-            currencyChart.data.labels = data.dates;
-            currencyChart.data.datasets[0].data = data.eur;
-            currencyChart.data.datasets[1].data = data.usd;
-            currencyChart.data.datasets[2].data = data.clp;
-            currencyChart.update();
-            updateExchangeRates(data);
-        }
-
-        // Simulación de actualización de la gráfica con datos en tiempo real
-        setInterval(() => {
-            fetch('/api/latest-prices')
-                .then(response => response.json())
-                .then(data => {
-                    updateChart(data);
-                });
-        }, 60000); // Actualiza cada 60 segundos
-
-        document.getElementById('converter-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const amount = parseFloat(document.getElementById('amount').value);
-            const fromCurrency = document.getElementById('from-currency').value;
-            const toCurrency = document.getElementById('to-currency').value;
-            fetch(`/api/convert?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('result').textContent = `Resultado: ${data.result}`;
-                });
-        });
-
-        let balance = 1000;
-
-        document.getElementById('trade-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const tradeAmount = parseFloat(document.getElementById('trade-amount').value);
-            const tradeCurrency = document.getElementById('trade-currency').value;
-            fetch(`/api/convert?amount=${tradeAmount}&from=USD&to=${tradeCurrency}`)
-                .then(response => response.json())
-                .then(data => {
-                    balance -= tradeAmount;
-                    document.getElementById('balance').textContent = balance.toFixed(2);
-                    document.getElementById('trade-result').textContent = `Compraste ${data.result} ${tradeCurrency}`;
-                });
-        });
-
-        document.getElementById('sell-button').addEventListener('click', function() {
-            const tradeAmount = parseFloat(document.getElementById('trade-amount').value);
-            const tradeCurrency = document.getElementById('trade-currency').value;
-            fetch(`/api/convert?amount=${tradeAmount}&from=${tradeCurrency}&to=USD`)
-                .then(response => response.json())
-                .then(data => {
-                    balance += data.result;
-                    document.getElementById('balance').textContent = balance.toFixed(2);
-                    document.getElementById('trade-result').textContent = `Vendiste ${tradeAmount} ${tradeCurrency} por ${data.result} USD`;
-                });
-        });
-    </script>
 </body>
 </html>
