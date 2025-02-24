@@ -7,28 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo">MiForex</div>
-            <nav>
-                <ul>
-                    <li><a href="#">Divisas</a></li>
-                    <li><a href="#">Compra</a></li>
-                    <li><a href="#">Venta</a></li>
-                    <li><a href="#">Cripto</a></li>
-                </ul>
-            </nav>
-            <div class="user">
-                <span>Francisco</span>
-            </div>
-        </div>
-    </header>
-
     <div class="container">
         <div class="left-section">
             <h1>Convertidor de divisas</h1>
             <form id="converter-form">
-                <input type="number" id="amount" placeholder="Amount" required>
+                <input type="number" id="amount" placeholder="Cantidad" required>
                 <select id="from-currency">
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
@@ -49,7 +32,7 @@
             <div id="simulator">
                 <p>Saldo ficticio: <span id="balance">1000</span> USD</p>
                 <form id="trade-form">
-                    <input type="number" id="trade-amount" placeholder="Amount" required>
+                    <input type="number" id="trade-amount" placeholder="Cantidad" required>
                     <select id="trade-currency">
                         <option value="EUR">EUR</option>
                         <option value="USD">USD</option>
