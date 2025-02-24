@@ -17,8 +17,16 @@
         </div>
         <form id="converter-form">
             <input type="number" id="amount" placeholder="Amount" required>
-            <select id="from-currency"></select>
-            <select id="to-currency"></select>
+            <select id="from-currency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="CLP">CLP</option>
+            </select>
+            <select id="to-currency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="CLP">CLP</option>
+            </select>
             <button type="submit">Convertir</button>
         </form>
         <div id="result"></div>
