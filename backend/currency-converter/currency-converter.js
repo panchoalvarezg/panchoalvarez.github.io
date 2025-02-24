@@ -6,7 +6,7 @@ const PORT = 3000;
 
 app.get('/api/currencies', async (req, res) => {
     try {
-        const response = await axios.get(`https://api.currencyapi.com/v3/latest?apikey=${cur_live_ZfVEDFIn1OwGsREozlo3yavN0czLKoUt2kp5E9al}&currencies=EUR%2CUSD%2CCLP`);
+        const response = await axios.get(`https://api.currencyapi.com/v3/latest?apikey=${process.env.CURRENCY_API_KEY}&currencies=EUR,USD,CLP`);
         const currencies = Object.keys(response.data.data);
         res.json(currencies);
     } catch (error) {
@@ -21,7 +21,7 @@ app.get('/api/convert', async (req, res) => {
         return res.status(400).json({ error: 'Missing query parameters' });
     }
     try {
-        const response = await axios.get(`https://api.currencyapi.com/v3/latest?apikey=${cur_live_ZfVEDFIn1OwGsREozlo3yavN0czLKoUt2kp5E9al}&currencies=EUR%2CUSD%2CCLP`);
+        const response = await axios.get(`https://api.currencyapi.com/v3/latest?apikey=${process.env.CURRENCY_API_KEY}&currencies=${from},${to}`);
         const rate = response.data.data[to]?.value;
         if (!rate) {
             return res.status(400).json({ error: 'Invalid currency code' });
