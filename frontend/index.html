@@ -6,48 +6,62 @@
     <title>Convertidor de Divisas</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .section {
+            width: 45%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Convertidor de divisas</h1>
-        <div id="exchange-rates">
-            <p>EUR: <span id="eur-rate"></span></p>
-            <p>USD: <span id="usd-rate"></span></p>
-            <p>CLP: <span id="clp-rate"></span></p>
-        </div>
-        <form id="converter-form">
-            <input type="number" id="amount" placeholder="Amount" required>
-            <select id="from-currency">
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="CLP">CLP</option>
-            </select>
-            <select id="to-currency">
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="CLP">CLP</option>
-            </select>
-            <button type="submit">Convertir</button>
-        </form>
-        <div id="result"></div>
-        <canvas id="currencyChart" width="400" height="200"></canvas>
-
-        <h2>Simulador de compra y venta de divisas</h2>
-        <div id="simulator">
-            <p>Saldo ficticio: <span id="balance">1000</span> USD</p>
-            <form id="trade-form">
-                <input type="number" id="trade-amount" placeholder="Amount" required>
-                <select id="trade-currency">
+        <div class="section">
+            <h1>Convertidor de divisas</h1>
+            <div id="exchange-rates">
+                <p>EUR: <span id="eur-rate"></span></p>
+                <p>USD: <span id="usd-rate"></span></p>
+                <p>CLP: <span id="clp-rate"></span></p>
+            </div>
+            <form id="converter-form">
+                <input type="number" id="amount" placeholder="Amount" required>
+                <select id="from-currency">
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
                     <option value="CLP">CLP</option>
                 </select>
-                <button type="submit">Comprar</button>
-                <button type="button" id="sell-button">Vender</button>
+                <select id="to-currency">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="CLP">CLP</option>
+                </select>
+                <button type="submit">Convertir</button>
             </form>
-            <div id="trade-result"></div>
+            <div id="result"></div>
+            <canvas id="currencyChart" width="400" height="200"></canvas>
+        </div>
+        
+        <div class="section">
+            <h2>Simulador de compra y venta de divisas</h2>
+            <div id="simulator">
+                <p>Saldo ficticio: <span id="balance">1000</span> USD</p>
+                <form id="trade-form">
+                    <input type="number" id="trade-amount" placeholder="Amount" required>
+                    <select id="trade-currency">
+                        <option value="EUR">EUR</option>
+                        <option value="USD">USD</option>
+                        <option value="CLP">CLP</option>
+                    </select>
+                    <button type="submit">Comprar</button>
+                    <button type="button" id="sell-button">Vender</button>
+                </form>
+                <div id="trade-result"></div>
+            </div>
         </div>
     </div>
+
     <script src="app.js"></script>
     <script>
         const ctx = document.getElementById('currencyChart').getContext('2d');
