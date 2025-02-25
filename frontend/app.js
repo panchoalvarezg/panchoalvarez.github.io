@@ -33,6 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const result = amount * rates[from][to];
         resultDiv.textContent = `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+        
+        // Mostrar resultados en los divs correspondientes
+        if(from === 'USD' && to === 'EUR') {
+            document.getElementById('usd-to-eur').querySelector('span').textContent = `${result.toFixed(2)}`;
+        }
+        if(from === 'USD' && to === 'CLP') {
+            document.getElementById('usd-to-clp').querySelector('span').textContent = `${result.toFixed(2)}`;
+        }
+        if(from === 'EUR' && to === 'CLP') {
+            document.getElementById('eur-to-clp').querySelector('span').textContent = `${result.toFixed(2)}`;
+        }
     };
 
     form.addEventListener('submit', event => {
