@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDiv = document.getElementById('result');
 
     const predefinedCurrencies = ['USD', 'CLP', 'EUR'];
+    const rates = {
+        "USD": {"CLP": 800, "EUR": 0.85},
+        "CLP": {"USD": 0.00125, "EUR": 0.00106},
+        "EUR": {"USD": 1.18, "CLP": 950}
+    };
 
     predefinedCurrencies.forEach(currency => {
         const option1 = document.createElement('option');
@@ -19,41 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
         toCurrency.appendChild(option2);
     });
 
-    const updateRates = () => {
-        fetch('/api/latest-prices')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('eur-rate').textContent = data.eur[data.eur.length - 1];
-                document.getElementById('usd-rate').textContent = data.usd[data.usd.length - 1];
-                document.getElementById('clp-rate').textContent = data.clp[data.clp.length - 1];
-                convertCurrency();
-            });
-    };
-
     const convertCurrency = () => {
         const amount = parseFloat(amountInput.value);
         const from = fromCurrency.value;
         const to = toCurrency.value;
 
-        if (isNaN(amount)) return;
+        if (isNaN(amount) || !rates[from] || !rates[from][to]) return;
 
-        fetch(`/api/convert?amount=${amount}&from=${from}&to=${to}`)
-            .then(response => response.json())
-            .then(data => {
-                resultDiv.textContent = `${amount} ${from} = ${data.result} ${to}`;
-            });
+        const result = amount * rates[from][to];
+        resultDiv.textContent = `${amount} ${from} = ${result.toFixed(2)} ${to}`;
     };
 
     form.addEventListener('submit', event => {
         event.preventDefault();
         convertCurrency();
     });
-
     fromCurrency.addEventListener('change', convertCurrency);
     toCurrency.addEventListener('change', convertCurrency);
     amountInput.addEventListener('input', convertCurrency);
-
-    // Actualizar las tasas de cambio cada 60 segundos
-    setInterval(updateRates, 60000);
-    updateRates(); // Primer llamada para actualizar inmediatamente
 });
