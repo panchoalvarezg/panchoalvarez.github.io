@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const predefinedCurrencies = ['USD', 'CLP', 'EUR'];
     const rates = {
-        "USD": {"CLP": 800, "EUR": 0.85},
-        "CLP": {"USD": 0.00125, "EUR": 0.00106},
-        "EUR": {"USD": 1.18, "CLP": 950}
+        "USD": {"CLP": 943,40, "EUR": 0.95},
+        "CLP": {"USD": 0,0011, "EUR": 0.0010},
+        "EUR": {"USD": 1.05, "CLP": 990.87}
     };
 
     predefinedCurrencies.forEach(currency => {
